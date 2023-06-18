@@ -26,7 +26,7 @@ class Logger_Base
             __FILE(__FILE),
             __LINE(__LINE)
         {
-            if(_access("./logs",0) == -1) system("mkdir .\logs > nul");
+            if(_access(".\\logs",0) == -1) system("mkdir .\\logs");
         }
         ~Logger_Base() {};
         void operator()(const std::string& _message, bool no_print = false, bool save = true) {
