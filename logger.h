@@ -3,6 +3,18 @@
 #include <fstream>
 #include <time.h>
 #include <io.h>
+
+#if_WIN32
+    #define OS_WINDOWS
+    #define LOGPATH ".\\logs"
+    #define COMMAND "mkdir .\\logs"
+#else
+    #define OS_LINUX
+    #define LOGPATH "./logs"
+    #define COMMAND "mkdir .\\logs"
+#endif
+
+
 class Logger_Base
 {
     private:
@@ -26,7 +38,7 @@ class Logger_Base
             __FILE(__FILE),
             __LINE(__LINE)
         {
-            if(_access(".\\logs",0) == -1) system("mkdir .\\logs");
+            if(_access(LOGPATH,0) == -1) system(COMMAND);
         }
         ~Logger_Base() {};
         void operator()(const std::string& _message, bool no_print = false, bool save = true) {
